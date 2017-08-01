@@ -1,3 +1,5 @@
+# version:python2.7.13
+# time:2017.08.01
 # coding:gbk
 import urllib2
 import re
@@ -11,8 +13,8 @@ def download(i):
     req=urllib2.urlopen(url).read()
     txt=re.compile(r'</a><br /><img src="//(.*?\.jpg)')
     result=txt.findall(req)
-    for ii in result:
-        urls.append(ii)
+    for ii in result: 
+        urls.append(ii)   #获取图片网址
     for i in urls:
         t='http://'+i
         pic=urllib2.urlopen(t, timeout=10)
@@ -24,9 +26,8 @@ def download(i):
         string='%s/%s' %(path,p)
         with open(string,'wb') as f:
             f.write(pic.read())
-            print '%s下载完成\n' %p,
+            print '%s下载完成\n' %p, #下载图片
             num+=1
-
 start=input('请输入起始页：')
 end=input('请输入终止页：')
 path=raw_input('请输入下载地址:')
@@ -34,7 +35,7 @@ print '开始下载'
 if __name__=='__main__':
     num=0
     threads=[]
-    for i in range(start,end+1):
+    for i in range(start,end+1):  #多线程创建
         t=threading.Thread(target=download,args=(i,))
         t.start()
         threads.append(t)
