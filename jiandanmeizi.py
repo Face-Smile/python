@@ -32,12 +32,13 @@ start=input('请输入起始页：')
 end=input('请输入终止页：')
 path=raw_input('请输入下载地址:')
 print '开始下载'
+num=0
+threads=[]
 if __name__=='__main__':
-    num=0
-    threads=[]
     for i in range(start,end+1):  #多线程创建
         t=threading.Thread(target=download,args=(i,))
         t.start()
         threads.append(t)
         t.join()
 print '一共下载了%d张图片' %num
+raw_input("please input ENTER to exit")
